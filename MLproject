@@ -20,12 +20,33 @@ entry_points:
       raw_dir: {type: str, default: "data/raw"}
       processed_dir: {type: str, default: "data/processed"}
     command: >
-      python -m src.prepare.generate_lightspeed_assets --raw_dir {raw_dir} --processed_dir {processed_dir}
+      python main.py prepare
+        --raw_dir {raw_dir}
+        --processed_dir {processed_dir}
     conda_env: conda/prepare_env.yaml
 
   train:
     parameters:
       config: {type: str, default: "config/inventory_full.json"}
     command: >
-      python -m src.train.train_from_config --config {config}
+      python main.py train
+        --config {config}
     conda_env: conda/train_env.yaml
+
+  pipeline:
+    parameters:
+      num_assets: {type: int, default: 11246}
+      seed: {type: int, default: 42}
+      raw_dir: {type: str, default: "data/raw"}
+      processed_dir: {type: str, default: "data/processed"}
+      inventory_config: {type: str, default: "config/inventory_full.json"}
+      ipam_config: {type: str, default: "config/ipam_full.json"}
+    command: >
+      python main.py pipeline
+        --num_assets {num_assets}
+        --seed {seed}
+        --raw_dir {raw_dir}
+        --processed_dir {processed_dir}
+        --inventory_config {inventory_config}
+        --ipam_config {ipam_config}
+    conda_env: conda/generate_env.yaml
