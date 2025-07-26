@@ -1,3 +1,5 @@
+# src/generate/inject_presence_noise.py
+
 import os
 import pandas as pd
 import numpy as np

@@ -1,3 +1,5 @@
+# src/generate/generate_base_assets.py
+
 import os
 import random
 import pandas as pd
