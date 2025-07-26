@@ -29,16 +29,14 @@ entry_points:
     parameters:
       config: {type: str, default: "config/inventory_full.json"}
     command: >
-      python main.py train
-        --config {config}
+      python main.py train-inventory --config {config}
     conda_env: conda/train_env.yaml
 
   train-ipam:
     parameters:
       config: {type: str, default: "config/ipam_full.json"}
     command: >
-      python main.py train
-        --config {config}
+      python main.py train-ipam --config {config}
     conda_env: conda/train_env.yaml
 
   train-both:
