@@ -1,0 +1,32 @@
+name: d502-pipeline
+
+entry_points:
+  generate:
+    parameters:
+      num_assets: {type: int, default: 11246}
+      seed: {type: int, default: 42}
+      raw_dir: {type: str, default: "data/raw"}
+      sqlite_path: {type: str, default: "data/sqlite/d502_assets.db"}
+    command: >
+      python main.py generate
+        --num_assets {num_assets}
+        --seed {seed}
+        --raw_dir {raw_dir}
+        --sqlite_path {sqlite_path}
+    conda_env: conda/generate_env.yaml
+  prepare:
+    parameters:
+      sqlite_path: {type: str, default: "data/sqlite/d502_assets.db"}
+      output_dir: {type: str, default: "data/processed"}
+    command: >
+      python -m src.prepare.main
+      --sqlite_path {sqlite_path}
+      --output_dir {output_dir}
+    conda_env: conda/prepare_env.yaml
+  train:
+    parameters:
+      input_dir: {type: str, default: "data/processed"}
+    command: >
+      python -m src.train.main
+      --input_dir {input_dir}
+    conda_env: conda/train_env.yaml
