@@ -23,11 +23,31 @@ def run_prepare(args):
     ]
     subprocess.run(cmd, check=True)
 
-def run_train(args):
+
+def run_train_inventory(args):
     cmd = [
         sys.executable,
-        "-m", "src.train.train_from_config",
-        "--config", args.config
+        "src/train/main.py",
+        "--inventory_config", args.config,
+        "--ipam_config", "config/ipam_full.json",  # Provide default so argparse doesn't error
+    ]
+    subprocess.run(cmd, check=True)
+
+def run_train_ipam(args):
+    cmd = [
+        sys.executable,
+        "src/train/main.py",
+        "--inventory_config", "config/inventory_full.json",  # Provide default
+        "--ipam_config", args.config,
+    ]
+    subprocess.run(cmd, check=True)
+    
+def run_train_both(args):
+    cmd = [
+        sys.executable,
+        "src/train/main.py",
+        "--inventory_config", args.inventory_config,
+        "--ipam_config", args.ipam_config
     ]
     subprocess.run(cmd, check=True)
 
@@ -45,16 +65,12 @@ def run_pipeline(args):
         processed_dir=args.processed_dir
     )
     run_prepare(prepare_args)
-    # Train inventory
-    train_inventory_args = argparse.Namespace(
-        config=args.inventory_config
+    # Train both
+    train_both_args = argparse.Namespace(
+        inventory_config=args.inventory_config,
+        ipam_config=args.ipam_config
     )
-    run_train(train_inventory_args)
-    # Train ipam
-    train_ipam_args = argparse.Namespace(
-        config=args.ipam_config
-    )
-    run_train(train_ipam_args)
+    run_train_both(train_both_args)
 
 def main():
     parser = argparse.ArgumentParser(description="D502 Lightspeed ML Pipeline Orchestrator")
@@ -71,9 +87,18 @@ def main():
     prepare_parser.add_argument("--raw_dir", type=str, default="data/raw")
     prepare_parser.add_argument("--processed_dir", type=str, default="data/processed")
 
-    # train
-    train_parser = subparsers.add_parser("train", help="Run the train step")
-    train_parser.add_argument("--config", type=str, default="config/inventory_full.json")
+    # train inventory
+    train_inventory_parser = subparsers.add_parser("train-inventory", help="Train inventory model")
+    train_inventory_parser.add_argument("--config", type=str, default="config/inventory_full.json")
+
+    # train ipam
+    train_ipam_parser = subparsers.add_parser("train-ipam", help="Train ipam model")
+    train_ipam_parser.add_argument("--config", type=str, default="config/ipam_full.json")
+
+    # train both models
+    train_both_parser = subparsers.add_parser("train-both", help="Train both inventory and ipam models")
+    train_both_parser.add_argument("--inventory_config", type=str, default="config/inventory_full.json")
+    train_both_parser.add_argument("--ipam_config", type=str, default="config/ipam_full.json")
 
     # pipeline
     pipeline_parser = subparsers.add_parser("pipeline", help="Run the full ML pipeline")
@@ -90,8 +115,12 @@ def main():
         run_generate(args)
     elif args.command == "prepare":
         run_prepare(args)
-    elif args.command == "train":
-        run_train(args)
+    elif args.command == "train-inventory":
+        run_train_inventory(args)
+    elif args.command == "train-ipam":
+        run_train_ipam(args)
+    elif args.command == "train-both":
+        run_train_both(args)
     elif args.command == "pipeline":
         run_pipeline(args)
     else:
