@@ -17,23 +17,13 @@ logging.basicConfig(
 )
 
 def main():
-    parser = argparse.ArgumentParser(description="Run synthetic asset data generation pipeline.")
-    parser.add_argument(
-        "--num_assets", type=int, default=11246,
-        help="Number of synthetic assets to generate"
-    )
-    parser.add_argument(
-        "--seed", type=int, default=42,
-        help="Random seed for reproducibility"
-    )
-    parser.add_argument(
-        "--raw_dir", type=str, default="data/raw",
-        help="Directory for generated raw data"
-    )
+    parser = argparse.ArgumentParser(description="Generate synthetic asset data.")
+    parser.add_argument("--num_assets", type=int, default=11246)
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--raw_dir", type=str, default="data/raw")
     args = parser.parse_args()
 
     os.makedirs(args.raw_dir, exist_ok=True)
-
     base_file = os.path.join(args.raw_dir, "base_asset_dataset.csv")
     labeled_file = os.path.join(args.raw_dir, "labeled_asset_dataset.csv")
 
@@ -41,7 +31,6 @@ def main():
     generate_assets(args.num_assets, base_file)
     inject_noise(base_file, labeled_file, args.seed)
     logging.info("🏁 Data generation pipeline completed.")
-
 
 if __name__ == "__main__":
     main()
