@@ -76,6 +76,20 @@ mlflow run . -e pipeline --env-manager=local
     ```
 - [MLflow](https://mlflow.org/)
 
+## Customizing Data Generation
+
+The data generation step uses a configuration file (`config/generation_params.json`) to control probabilities for missing inventory and IPAM records. 
+
+You can easily experiment with alternative scenarios by creating and referencing a different config file.  
+For example:
+```bash
+mlflow run . -e generate --env-manager=local -P config=config/alt_params.json
+```
+or
+```bash
+python main.py generate --config config/alt_params.json
+```
+
 ## Deliverables
 
 - All code, configuration files, datasets, and reports needed to fully reproduce results.
