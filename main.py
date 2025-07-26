@@ -28,8 +28,8 @@ def run_train_inventory(args):
     cmd = [
         sys.executable,
         "src/train/main.py",
-        "--inventory_config", args.config,
-        "--ipam_config", "config/ipam_full.json",  # Provide default so argparse doesn't error
+        "inventory",          # <--- Subcommand!
+        "--config", args.config
     ]
     subprocess.run(cmd, check=True)
 
@@ -37,8 +37,8 @@ def run_train_ipam(args):
     cmd = [
         sys.executable,
         "src/train/main.py",
-        "--inventory_config", "config/inventory_full.json",  # Provide default
-        "--ipam_config", args.config,
+        "ipam",               # <--- Subcommand!
+        "--config", args.config
     ]
     subprocess.run(cmd, check=True)
     
@@ -46,6 +46,7 @@ def run_train_both(args):
     cmd = [
         sys.executable,
         "src/train/main.py",
+        "both",
         "--inventory_config", args.inventory_config,
         "--ipam_config", args.ipam_config
     ]
