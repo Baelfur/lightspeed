@@ -5,13 +5,17 @@ import pandas as pd
 import numpy as np
 import argparse
 import logging
+import json
 
 from src.shared.constants import (
     ROLE_VENDOR_MODEL_MAP,
-    INVENTORY_MODEL_MISSING_PROBS,
-    IPAM_REGION_MISSING_PROBS,
-    DEFAULT_MODEL_FAILURE_PROB
 )
+
+# --- Load probability config ---
+def load_prob_config(config_path="config/generation_params.json"):
+    with open(config_path, "r") as f:
+        params = json.load(f)
+    return params
 
 logging.basicConfig(
     level=logging.INFO,
@@ -19,10 +23,15 @@ logging.basicConfig(
     datefmt='%H:%M:%S'
 )
 
-
-def inject_noise(input_path: str, output_path: str, seed: int = 42):
+def inject_noise(input_path: str, output_path: str, seed: int = 42, config_path="config/generation_params.json"):
     logging.info("🔄 Loading base dataset...")
     df = pd.read_csv(input_path)
+
+    # Load probabilities from config
+    params = load_prob_config(config_path)
+    INVENTORY_MODEL_MISSING_PROBS = params["INVENTORY_MODEL_MISSING_PROBS"]
+    IPAM_REGION_MISSING_PROBS = params["IPAM_REGION_MISSING_PROBS"]
+    DEFAULT_MODEL_FAILURE_PROB = params["DEFAULT_MODEL_FAILURE_PROB"]
 
     # --- Inventory Presence Flags ---
     df["missing_in_inventory"] = 0
@@ -65,7 +74,6 @@ def inject_noise(input_path: str, output_path: str, seed: int = 42):
     logging.info(f"✅ Labeled dataset saved to: {output_path}")
     logging.info(f"🧮 Final shape: {df.shape}")
 
-
 def main():
     parser = argparse.ArgumentParser(description="Inject missing labels into asset dataset")
     parser.add_argument(
@@ -80,10 +88,13 @@ def main():
         "--seed", type=int, default=42,
         help="Random seed for reproducibility"
     )
+    parser.add_argument(
+        "--config", type=str, default="config/generation_params.json",
+        help="Path to probability config JSON"
+    )
     args = parser.parse_args()
 
-    inject_noise(args.input, args.output, args.seed)
-
+    inject_noise(args.input, args.output, args.seed, args.config)
 
 if __name__ == "__main__":
     main()

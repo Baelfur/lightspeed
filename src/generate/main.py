@@ -1,4 +1,4 @@
-#src/generate/main.py
+# src/generate/main.py
 
 import argparse
 import os
@@ -21,6 +21,10 @@ def main():
     parser.add_argument("--num_assets", type=int, default=11246)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--raw_dir", type=str, default="data/raw")
+    parser.add_argument(
+        "--config", type=str, default="config/generation_params.json",
+        help="Path to probability config JSON"
+    )
     args = parser.parse_args()
 
     os.makedirs(args.raw_dir, exist_ok=True)
@@ -29,7 +33,7 @@ def main():
 
     logging.info("🚀 Starting data generation pipeline...")
     generate_assets(args.num_assets, base_file)
-    inject_noise(base_file, labeled_file, args.seed)
+    inject_noise(base_file, labeled_file, args.seed, args.config)
     logging.info("🏁 Data generation pipeline completed.")
 
 if __name__ == "__main__":

@@ -8,12 +8,9 @@ entry_points:
       num_assets: {type: int, default: 11246}
       seed: {type: int, default: 42}
       raw_dir: {type: str, default: "data/raw"}
+      config: {type: str, default: "config/generation_params.json"}
     command: >
-      python main.py generate
-        --num_assets {num_assets}
-        --seed {seed}
-        --raw_dir {raw_dir}
-    conda_env: conda/generate_env.yaml
+      python main.py generate --num_assets {num_assets} --seed {seed} --raw_dir {raw_dir} --config {config}
 
   prepare:
     parameters:
