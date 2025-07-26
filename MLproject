@@ -54,6 +54,7 @@ entry_points:
       processed_dir: {type: str, default: "data/processed"}
       inventory_config: {type: str, default: "config/inventory_full.json"}
       ipam_config: {type: str, default: "config/ipam_full.json"}
+      config: {type: str, default: "config/generation_params.json"}
     command: >
       python main.py pipeline
         --num_assets {num_assets}
@@ -62,4 +63,5 @@ entry_points:
         --processed_dir {processed_dir}
         --inventory_config {inventory_config}
         --ipam_config {ipam_config}
+        --config {config}
     conda_env: conda/generate_env.yaml
