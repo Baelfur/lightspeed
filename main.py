@@ -9,8 +9,7 @@ def run_generate(args):
         "src/generate/main.py",
         "--num_assets", str(args.num_assets),
         "--seed", str(args.seed),
-        "--raw_dir", args.raw_dir,
-        "--sqlite_path", args.sqlite_path
+        "--raw_dir", args.raw_dir
     ]
     subprocess.run(cmd, check=True)
 
@@ -23,7 +22,7 @@ def main():
     generate_parser.add_argument("--num_assets", type=int, default=11246)
     generate_parser.add_argument("--seed", type=int, default=42)
     generate_parser.add_argument("--raw_dir", type=str, default="data/raw")
-    generate_parser.add_argument("--sqlite_path", type=str, default="data/sqlite/d502_assets.db")
+    # Removed --sqlite_path
 
     args = parser.parse_args()
 

@@ -1,0 +1,13 @@
+{
+  "input_csv": "data/processed/labeled_asset_dataset_enriched.csv",
+  "features": ["region", "status", "vendor", "model", "role"],
+  "label": "missing_in_inventory",
+  "output_model": "models/inventory/inventory_model.joblib",
+  "output_encoder": "models/inventory/inventory_encoder.joblib",
+  "output_plot": "reports/inventory/inventory_feature_importance.png",
+  "output_report": "reports/inventory/inventory_classification_report.json",
+  "test_size": 0.2,
+  "random_state": 42,
+  "n_estimators": 100,
+  "top_n_features": 20
+}

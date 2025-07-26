@@ -1,4 +1,4 @@
-# constants.py
+# src/shared/constants.py
 
 # Role-to-model mapping (no overlaps)
 ROLE_VENDOR_MODEL_MAP = {

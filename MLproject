@@ -1,3 +1,5 @@
+# MLproject file for d502-pipeline
+
 name: d502-pipeline
 
 entry_points:
@@ -6,27 +8,24 @@ entry_points:
       num_assets: {type: int, default: 11246}
       seed: {type: int, default: 42}
       raw_dir: {type: str, default: "data/raw"}
-      sqlite_path: {type: str, default: "data/sqlite/d502_assets.db"}
     command: >
       python main.py generate
         --num_assets {num_assets}
         --seed {seed}
         --raw_dir {raw_dir}
-        --sqlite_path {sqlite_path}
     conda_env: conda/generate_env.yaml
+
   prepare:
     parameters:
-      sqlite_path: {type: str, default: "data/sqlite/d502_assets.db"}
-      output_dir: {type: str, default: "data/processed"}
+      raw_dir: {type: str, default: "data/raw"}
+      processed_dir: {type: str, default: "data/processed"}
     command: >
-      python -m src.prepare.main
-      --sqlite_path {sqlite_path}
-      --output_dir {output_dir}
+      python -m src.prepare.generate_lightspeed_assets --raw_dir {raw_dir} --processed_dir {processed_dir}
     conda_env: conda/prepare_env.yaml
+
   train:
     parameters:
-      input_dir: {type: str, default: "data/processed"}
+      config: {type: str, default: "config/inventory_full.json"}
     command: >
-      python -m src.train.main
-      --input_dir {input_dir}
+      python -m src.train.train_from_config --config {config}
     conda_env: conda/train_env.yaml

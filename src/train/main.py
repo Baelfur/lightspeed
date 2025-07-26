@@ -1,18 +1,24 @@
 # src/train/main.py
 
 import argparse
-from src.train.train_inventory_model import train_inventory_model
-from src.train.train_ipam_model import train_ipam_model
+import subprocess
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Train inventory and IPAM models")
-    parser.add_argument("--input_dir", type=str, default="data/processed", help="Directory with training CSVs")
+    parser = argparse.ArgumentParser(description="Train one or more models using config files")
+    parser.add_argument("--inventory_config", type=str, default="config/inventory_full.json")
+    parser.add_argument("--ipam_config", type=str, default="config/ipam_full.json")
     return parser.parse_args()
 
 def main():
     args = parse_args()
-    train_inventory_model(args.input_dir)
-    train_ipam_model(args.input_dir)
+    # Train inventory model
+    subprocess.run([
+        "python", "-m", "src.train.train_from_config", "--config", args.inventory_config
+    ], check=True)
+    # Train IPAM model
+    subprocess.run([
+        "python", "-m", "src.train.train_from_config", "--config", args.ipam_config
+    ], check=True)
 
 if __name__ == "__main__":
     main()
