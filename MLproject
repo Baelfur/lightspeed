@@ -25,12 +25,30 @@ entry_points:
         --processed_dir {processed_dir}
     conda_env: conda/prepare_env.yaml
 
-  train:
+  train-inventory:
     parameters:
       config: {type: str, default: "config/inventory_full.json"}
     command: >
       python main.py train
         --config {config}
+    conda_env: conda/train_env.yaml
+
+  train-ipam:
+    parameters:
+      config: {type: str, default: "config/ipam_full.json"}
+    command: >
+      python main.py train
+        --config {config}
+    conda_env: conda/train_env.yaml
+
+  train-both:
+    parameters:
+      inventory_config: {type: str, default: "config/inventory_full.json"}
+      ipam_config: {type: str, default: "config/ipam_full.json"}
+    command: >
+      python main.py train-both
+        --inventory_config {inventory_config}
+        --ipam_config {ipam_config}
     conda_env: conda/train_env.yaml
 
   pipeline:
