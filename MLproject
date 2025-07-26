@@ -8,12 +8,9 @@ entry_points:
       num_assets: {type: int, default: 11246}
       seed: {type: int, default: 42}
       raw_dir: {type: str, default: "data/raw"}
+      config: {type: str, default: "config/generation_params.json"}
     command: >
-      python main.py generate
-        --num_assets {num_assets}
-        --seed {seed}
-        --raw_dir {raw_dir}
-    conda_env: conda/generate_env.yaml
+      python main.py generate --num_assets {num_assets} --seed {seed} --raw_dir {raw_dir} --config {config}
 
   prepare:
     parameters:
@@ -54,6 +51,7 @@ entry_points:
       num_assets: {type: int, default: 11246}
       seed: {type: int, default: 42}
       raw_dir: {type: str, default: "data/raw"}
+      config: {type: str, default: "config/generation_params.json"}
       processed_dir: {type: str, default: "data/processed"}
       inventory_config: {type: str, default: "config/inventory_full.json"}
       ipam_config: {type: str, default: "config/ipam_full.json"}
@@ -62,6 +60,7 @@ entry_points:
         --num_assets {num_assets}
         --seed {seed}
         --raw_dir {raw_dir}
+        --config {config}
         --processed_dir {processed_dir}
         --inventory_config {inventory_config}
         --ipam_config {ipam_config}

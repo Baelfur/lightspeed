@@ -1,0 +1,27 @@
+{
+  "IPAM_REGION_MISSING_PROBS": {
+    "northeast": 0.01,
+    "northwest": 0.01,
+    "central": 0.01,
+    "east": 0.02,
+    "west": 0.45,
+    "southeast": 0.03,
+    "southwest": 0.01
+  },
+  "INVENTORY_MODEL_MISSING_PROBS": {
+    "ISR4431": 0.01,
+    "SRX345": 0.03,
+    "ETX-2": 0.02,
+    "MX204": 0.01,
+    "NCS540": 0.05,
+    "7750 SR-1": 0.01,
+    "7280R": 0.03,
+    "FSP3000": 0.1,
+    "FSP150": 0.82,
+    "QFX5120": 0.74,
+    "7050X3": 0.02,
+    "Catalyst9300": 0.03
+  },
+  "DEFAULT_MODEL_FAILURE_PROB": 0.1,
+  "DEFAULT_REGION_FAILURE_PROB": 0.1
+}

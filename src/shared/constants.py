@@ -99,39 +99,3 @@ REGION_SUBNET_MAP = {
     "northeast":  "10.60.0.0/16",
     "northwest":  "10.70.0.0/16"
 }
-
-# IPAM presence probability by region
-IPAM_REGION_MISSING_PROBS = {
-    "northeast": 0.3,
-    "northwest": 0.01,
-    "central": 0.01,
-    "east": 0.02,
-    "west": 0.05,
-    "southeast": 0.03,
-    "southwest": 0.01
-}
-
-INVENTORY_MODEL_MISSING_PROBS = {
-    # EDGE DEVICES (high failure)
-    "ISR4431": 0.50,
-    "SRX345":  0.60,
-    "ETX-2":   0.40,
-    # CORE (low failure)
-    "MX204": 0.01,
-    "NCS540": 0.05,
-    "7750 SR-1": 0.01,
-    # AGG
-    "7280R": 0.03,
-    "FSP3000": 0.10,
-    # DIST
-    "FSP150": 0.10,
-    "QFX5120": 0.05,
-    # RTR
-    "7050X3": 0.02,
-    # SW
-    "Catalyst9300": 0.03
-}
-
-# Fallback probabilities
-DEFAULT_MODEL_FAILURE_PROB = 0.1
-DEFAULT_REGION_FAILURE_PROB = 0.1
