@@ -33,6 +33,7 @@ def main():
 
     logging.info("🚀 Starting data generation pipeline...")
     generate_assets(args.num_assets, base_file)
+    logging.info(f"CALLING inject_noise with config: {args.config}")
     inject_noise(base_file, labeled_file, args.seed, args.config)
     logging.info("🏁 Data generation pipeline completed.")
 

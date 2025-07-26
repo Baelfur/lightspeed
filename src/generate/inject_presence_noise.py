@@ -24,6 +24,7 @@ logging.basicConfig(
 )
 
 def inject_noise(input_path: str, output_path: str, seed: int = 42, config_path="config/generation_params.json"):
+    logging.info(f"INJECTING NOISE USING CONFIG: {config_path}")
     logging.info("🔄 Loading base dataset...")
     df = pd.read_csv(input_path)
 

@@ -54,6 +54,7 @@ def run_train_both(args):
     subprocess.run(cmd, check=True)
 
 def run_pipeline(args):
+    print(f"[DEBUG] Pipeline received config: {args.config}")
     # Generate
     generate_args = argparse.Namespace(
         num_assets=args.num_assets,
@@ -84,8 +85,7 @@ def main():
     generate_parser.add_argument("--num_assets", type=int, default=11246)
     generate_parser.add_argument("--seed", type=int, default=42)
     generate_parser.add_argument("--raw_dir", type=str, default="data/raw")
-    generate_parser.add_argument("--config", type=str, default="config/generation_params.json",
-                                 help="Path to probability config JSON")
+    generate_parser.add_argument("--config", type=str, default="config/generation_params.json")
 
     # prepare
     prepare_parser = subparsers.add_parser("prepare", help="Run the prepare step")
