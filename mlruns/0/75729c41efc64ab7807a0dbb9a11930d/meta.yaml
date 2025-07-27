@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/baelf/OneDrive/Documents/dev/school/school/lightspeed/mlruns/0/75729c41efc64ab7807a0dbb9a11930d/artifacts
+end_time: 1753577289152
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 75729c41efc64ab7807a0dbb9a11930d
+run_name: adaptable-turtle-522
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753577280092
+status: 3
+tags: []
+user_id: baelf

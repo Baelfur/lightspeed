@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/baelf/OneDrive/Documents/dev/school/school/lightspeed/mlruns/0/149b240bc37e430a8c823c2543990933/artifacts
+end_time: 1753577306499
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 149b240bc37e430a8c823c2543990933
+run_name: respected-lynx-696
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753577300054
+status: 3
+tags: []
+user_id: baelf
