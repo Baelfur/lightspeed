@@ -207,4 +207,4 @@ marimo/_lsp/
 __marimo__/
 
 # mlruns for now
-mlruns/
+# mlruns/ deleting for final run
