@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/baelf/OneDrive/Documents/dev/school/school/lightspeed/mlruns/0/7769e932d1044a0786dc9ef607d15c7a/artifacts
+end_time: 1753926926028
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 7769e932d1044a0786dc9ef607d15c7a
+run_name: bouncy-moth-488
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753926924231
+status: 3
+tags: []
+user_id: baelf
